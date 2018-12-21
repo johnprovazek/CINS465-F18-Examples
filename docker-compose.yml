@@ -1,15 +1,13 @@
-#adapted from example in docker documentation
 version: '3'
+
 
 services:
   web:
-    restart: always
-    image: registry.gitlab.com/csuchico/csuc-cins465/cins465-f18-examples:latest
-    #build: .
-    #volumes:
-    #   - .:/code
+    build: .
+    volumes:
+      - .:/code
     expose:
-       - "8000"
+      - "8000"
     command: python /code/mysite/manage.py runserver 0.0.0.0:8000
 
   nginx:
@@ -19,8 +17,5 @@ services:
       - web
     ports:
       - "80:80"
-    #  - "443:443"
-#     volumes:
-#        - ./code/static:/static
     links:
       - web:web
