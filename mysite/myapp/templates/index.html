@@ -1,87 +1,56 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="grid-container">
-  <div class="grid-x grid-padding-x">
-      <div class="large-12 cell">
-        <h1>Hello World Template</h1>
-      </div>
-      <!-- <div class="large-12 cell">
-        {% if user.is_authenticated %}
-            <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-        {% else %}
-            <p>Welcome, new user. <a href="/login/">Please log in.</a></p>
-        {% endif %}
-      </div> -->
-      {% if user.is_authenticated %}
-      <div class="large-4 cell">
-        <form action="/" method="post">
-            {% csrf_token %}
-            {{ form_instance }}
-            <input type="submit" class="button expanded" value="Submit">
-        </form>
-      </div>
-      <div id="app-4" class="large-8 cell">
-          <div v-for="todo in suggestions" >
-            {% verbatim %}
-            <div class="card-info secondary">
-              <!-- <div class="card-info-label">
-                <div class="card-info-label-text">
-                    sugg
-                </div>
-              </div> -->
-              <div class="card-info-content">
-                <h3 class="lead">{{ todo.suggestion }}</h3>
-                <p>authored by {{ todo.author }} on {{ todo.created_on }}</p>
-              </div>
-            </div>
-            <div class="grid-container">
-              <div class="grid-x grid-padding-x">
-                <div v-for="comm in todo.comments" class="large-10 large-offset-2 cell">
-                  <div class="card-info secondary">
-                    <!-- <div class="card-info-label">
-                      <div class="card-info-label-text">
-                          comm
-                      </div>
-                    </div> -->
-                    <div class="card-info-content">
-                      <h3 class="lead">{{ comm.comment }}</h3>
-                      <p>authored by {{ comm.author }} on {{ comm.created_on }}</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="large-10 large-offset-2 cell">
-                  <form v-bind:action="'/comment/'+ todo.id+'/'" method="post">
-                      {% endverbatim %}
-                      {% csrf_token %}
-                      <!-- <h4 class="text-center">Comment</h4> -->
-                      {{ comm_form }}
-                      {% verbatim %}
-                      <input type="submit" class="button expanded" value="Comment" />
-                  </form>
-                </div>
-              </div>
-            </div>
 
-            {% endverbatim %}
+<script type="text/javascript">
+   var DATA = "{{data}}";
+   var PLAYERS = "{{players}}"
+</script>
+
+<br>
+
+<article class="grid-container">
+  <div class="grid-x">
+    <div class = "small-12 medium-5 large-5", id="gamesList">
+      <div class="grid-x title blur", id="baseTitle">
+        <div class="small-12 medium-12 large-12", style="text-align:center;">
+          <div class="cell">
+            <span> NBA Games Today</span>
           </div>
+        </div>
       </div>
-
-      {% endif %}
+    </div>
+    <div class = "small-12 medium-7 large-7", id="leagueLeaders">
+      <div class="grid-x title blur">
+        <div class="small-12 medium-12 large-12", style="text-align:center;">
+          <div class="cell">
+            <span> Total Season Points </span>
+          </div>
+        </div>
+      </div>
+      <div class="grid-x small-up-5 medium-up-5 large-up-5", id="seasonPoints"></div>
+      <div class="grid-x title blur">
+        <div class="small-12 medium-12 large-12", style="text-align:center;">
+          <div class="cell">
+            <span> Total Season Assists </span>
+          </div>
+        </div>
+      </div>
+      <div class="grid-x small-up-5 medium-up-5 large-up-5", id="fieldPercentage"></div>
+      <div class="grid-x title blur">
+        <div class="small-12 medium-12 large-12", style="text-align:center;">
+          <div class="cell">
+            <span> Total Season Three-Pointers Made </span>
+          </div>
+        </div>
+      </div>
+      <div class="grid-x small-up-5 medium-up-5 large-up-5", id="threesMade"></div>
+    </div>
   </div>
-</div>
-
-
-
-
+</article>
 
 {% endblock %}
 
 {% block scripts %}
-<!-- development version, includes helpful console warnings -->
-{% if user.is_authenticated %}
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.js"></script>
-<script src="{% static "js/my_vue.js" %}"></script>
-{% endif %}
+<script src="{% static "js/index.js" %}"></script>
 {% endblock %}

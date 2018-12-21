@@ -1,20 +1,43 @@
+# from django.db import models
+#
+# # Create your models here.
+# class SuggestionModel(models.Model):
+#     suggestion = models.CharField(max_length=240)
+#
+#     def __str__(self):
+#         return self.suggestion
+
 from django.db import models
-from django.contrib.auth.models import User
+from jsonfield import JSONField
+# import jsonfield
 
-# Create your models here.
-class SuggestionModel(models.Model):
-    suggestion = models.CharField(max_length=240)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    creation_date = models.DateTimeField(auto_now_add=True)
+class MyModelName(models.Model):
+    """A typical class defining a model, derived from the Model class."""
+
+    # Fields
+    my_field_name = models.CharField(max_length=20, help_text='Enter field documentation')
+
+    # Metadata
+    class Meta:
+        ordering = ['-my_field_name']
+
+    # Methods
+    def get_absolute_url(self):
+        """Returns the url to access a particular instance of MyModelName."""
+        return reverse('model-detail-view', args=[str(self.id)])
 
     def __str__(self):
-        return self.suggestion
+        """String for representing the MyModelName object (in Admin site etc.)."""
+        return self.my_field_name
 
-class CommentModel(models.Model):
-    comment = models.CharField(max_length=240)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    suggestion = models.ForeignKey(SuggestionModel, on_delete=models.CASCADE)
-    creation_date = models.DateTimeField(auto_now_add=True)
+class AltModel(models.Model):
+    field = models.CharField(max_length=240)
 
     def __str__(self):
-        return "%s authored by %s" % (self.comment, self.author)
+        return self.field
+
+class FirstTry(models.Model):
+    data = JSONField()
+
+    def __str__(self):
+        return self.data

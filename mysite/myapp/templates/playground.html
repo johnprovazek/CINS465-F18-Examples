@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<script type="text/javascript">
+   var DATA = "{{data}}";
+   var PLAYERS = "{{players}}"
+</script>
+
+<br>
+
+<article class="grid-container">
+  <div class="grid-x">
+    <div class = "small-12 medium-5 large-5", id="gamesList">
+      <div class="grid-x title blur", id="baseTitle">
+        <div class="small-12 medium-12 large-12", style="text-align:center;">
+          <div class="cell">
+            <span> NBA Games Today</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class = "small-12 medium-7 large-7", id="leagueLeaders">
+      <div class="grid-x title blur">
+        <div class="small-12 medium-12 large-12", style="text-align:center;">
+          <div class="cell">
+            <span> Total Season Points</span>
+          </div>
+        </div>
+      </div>
+      <div class="grid-x small-up-5 medium-up-5 large-up-5", id="seasonPoints"></div>
+      <div class="grid-x title blur">
+        <div class="small-12 medium-12 large-12", style="text-align:center;">
+          <div class="cell">
+            <span> Total Season Field Goal Percentage</span>
+          </div>
+        </div>
+      </div>
+      <div class="grid-x small-up-5 medium-up-5 large-up-5", id="fieldPercentage"></div>
+      <div class="grid-x title blur">
+        <div class="small-12 medium-12 large-12", style="text-align:center;">
+          <div class="cell">
+            <span> Total Season Three-Pointers Made</span>
+          </div>
+        </div>
+      </div>
+      <div class="grid-x small-up-5 medium-up-5 large-up-5", id="threesMade"></div>
+    </div>
+  </div>
+</article>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static "js/index.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<script type="text/javascript">
+   var DATA = "{{data}}";
+</script>
+
+<br>
+
+<article class="grid-container">
+  <div class="grid-x">
+    <div class ="small-12 medium-12 large-12", style="text-align:center;">
+      <h2 id="game_title"></h2>
+      <h2 id="game_score"></h2>
+      <h2 id="game_start"></h2>
+      <div id="chart_div"></div>
+    </div>
+  </div>
+</article>
+
+
+
+<!-- <h2 id="game_title"> GAME_TITLE </h2>
+<h2 id="game_score"> GAME_SCORE </h2>
+<h2 id="game_start"> GAME_START </h2>
+<div id="chart_div"></div>
+<script>
+  document.body.onload = setPoints;
+  function setPoints() {
+    var form_data = $('<textarea />').html('{{ data }}').text();  // Getting rid of HTML entity value
+    var form_data_doub = form_data.replace(/'/g, '"');  // Changing single quotes to double quotes.
+    console.log(form_data_doub)
+    var obj = JSON.parse(form_data_doub); // Parsing JSON
+    var game_title = document.getElementById("game_title");
+    var game_score = document.getElementById("game_score");
+    var game_start = document.getElementById("game_start");
+    game_title.innerHTML = "Game: " + obj[0].home_team + " vs " + obj[0].away_team;
+    game_score.innerHTML = "Score: " + obj[0].home_pts + " - " + obj[0].away_pts;
+    var localDate = new Date(obj[0].start_time);
+    var hour = localDate.getHours()%12;
+    var min = localDate.getMinutes();
+    var time_day = "AM";
+    if(localDate.getHours() > 12)
+    {
+      time_day = "PM";
+    }
+    if(min < 10)
+    {
+      min = "0" + min;
+    }
+    game_start.innerHTML = "Start time: " + hour + ":" + min + time_day;
+    if(obj[0].home_pts == "" || obj[0].away_pts == "")
+    {
+      game_score.innerHTML = "Score: 0 - 0";
+    }
+    console.log(obj[0].start_time);
+    console.log("{{python_start_time}}")
+  }
+</script> -->
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist.vue.js"></script> -->
+<script src="{% static "js/my_vue.js" %}"></script>
+<script src="{% static "js/gameChart.js" %}"></script>
+{% endblock %}
